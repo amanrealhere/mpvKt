@@ -161,6 +161,8 @@
     <string name="pref_about_privacy_policy">Privacy policy</string>
 
     <string name="player_sheets_add_ext_sub">Add external subtitles</string>
+    <string name="player_sheets_add_track_url">Add from URL</string>
+    <string name="player_sheets_track_url_hint">Track URL</string>
     <string name="player_sheets_add_ext_audio">Add external audio tracks</string>
     <string name="player_sheets_tracks_off">Off</string>
     <string name="player_sheets_track_title_w_lang" translatable="false">#%d: %s (%s)</string>

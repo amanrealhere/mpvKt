@@ -4,6 +4,7 @@ import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import dev.vivvvek.seeker.Segment
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
@@ -12,6 +13,7 @@ import live.mehiz.mpvkt.ui.player.Decoder
 import live.mehiz.mpvkt.ui.player.Panels
 import live.mehiz.mpvkt.ui.player.Sheets
 import live.mehiz.mpvkt.ui.player.TrackNode
+import live.mehiz.mpvkt.ui.player.controls.components.sheets.AddTrackUrlDialog
 import live.mehiz.mpvkt.ui.player.controls.components.sheets.AudioTracksSheet
 import live.mehiz.mpvkt.ui.player.controls.components.sheets.ChaptersSheet
 import live.mehiz.mpvkt.ui.player.controls.components.sheets.DecodersSheet
@@ -26,10 +28,12 @@ fun PlayerSheets(
   // subtitles sheet
   subtitles: ImmutableList<TrackNode>,
   onAddSubtitle: (Uri) -> Unit,
+  onAddSubtitleFromUrl: (String) -> Unit,
   onSelectSubtitle: (Int) -> Unit,
   // audio sheet
   audioTracks: ImmutableList<TrackNode>,
   onAddAudio: (Uri) -> Unit,
+  onAddAudioFromUrl: (String) -> Unit,
   onSelectAudio: (TrackNode) -> Unit,
   // chapters sheet
   chapter: Segment?,
@@ -58,6 +62,19 @@ fun PlayerSheets(
   when (sheetShown) {
     Sheets.None -> {}
     Sheets.SubtitleTracks -> {
+      var showSubtitleUrlDialog = false
+
+      if (showSubtitleUrlDialog) {
+        AddTrackUrlDialog(
+          title = stringResource(R.string.player_sheets_add_track_url),
+          onAdd = {
+            showSubtitleUrlDialog = false
+            onAddSubtitleFromUrl(it)
+          },
+          onDismissRequest = { showSubtitleUrlDialog = false },
+        )
+      }
+
       val subtitlesPicker = rememberLauncherForActivityResult(
         ActivityResultContracts.OpenDocument(),
       ) {
@@ -68,6 +85,7 @@ fun PlayerSheets(
         tracks = subtitles.toImmutableList(),
         onSelect = onSelectSubtitle,
         onAddSubtitle = { subtitlesPicker.launch(arrayOf("*/*")) },
+        onAddSubtitleFromUrl = { showSubtitleUrlDialog = true },
         onOpenSubtitleSettings = { onOpenPanel(Panels.SubtitleSettings) },
         onOpenSubtitleDelay = { onOpenPanel(Panels.SubtitleDelay) },
         onDismissRequest = onDismissRequest,
@@ -75,6 +93,19 @@ fun PlayerSheets(
     }
 
     Sheets.AudioTracks -> {
+      var showAudioUrlDialog = false
+
+      if (showAudioUrlDialog) {
+        AddTrackUrlDialog(
+          title = stringResource(R.string.player_sheets_add_track_url),
+          onAdd = {
+            showAudioUrlDialog = false
+            onAddAudioFromUrl(it)
+          },
+          onDismissRequest = { showAudioUrlDialog = false },
+        )
+      }
+
       val audioPicker = rememberLauncherForActivityResult(
         ActivityResultContracts.OpenDocument(),
       ) {
@@ -85,6 +116,7 @@ fun PlayerSheets(
         tracks = audioTracks,
         onSelect = onSelectAudio,
         onAddAudioTrack = { audioPicker.launch(arrayOf("*/*")) },
+        onAddAudioTrackFromUrl = { showAudioUrlDialog = true },
         onOpenDelayPanel = { onOpenPanel(Panels.AudioDelay) },
         onDismissRequest,
       )

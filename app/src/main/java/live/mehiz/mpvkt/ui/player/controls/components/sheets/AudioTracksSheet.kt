@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Link
 import androidx.compose.material.icons.filled.MoreTime
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -28,6 +29,7 @@ fun AudioTracksSheet(
   tracks: ImmutableList<TrackNode>,
   onSelect: (TrackNode) -> Unit,
   onAddAudioTrack: () -> Unit,
+  onAddAudioTrackFromUrl: () -> Unit,
   onOpenDelayPanel: () -> Unit,
   onDismissRequest: () -> Unit,
   modifier: Modifier = Modifier
@@ -40,6 +42,9 @@ fun AudioTracksSheet(
         stringResource(R.string.player_sheets_add_ext_audio),
         onAddAudioTrack,
         actions = {
+          IconButton(onClick = onAddAudioTrackFromUrl) {
+            Icon(Icons.Default.Link, stringResource(R.string.player_sheets_add_track_url))
+          }
           IconButton(onClick = onOpenDelayPanel) {
             Icon(Icons.Default.MoreTime, null)
           }

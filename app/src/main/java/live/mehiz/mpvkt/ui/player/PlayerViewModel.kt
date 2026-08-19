@@ -178,6 +178,14 @@ class PlayerViewModel(
     MPVLib.command("sub-add", path ?: return, "cached")
   }
 
+  fun addAudioFromUrl(url: String) {
+    MPVLib.command("audio-add", url.trim())
+  }
+
+  fun addSubtitleFromUrl(url: String) {
+    MPVLib.command("sub-add", url.trim())
+  }
+
   fun selectSub(id: Int) {
     val selectedSubs = Pair(MPVLib.getPropertyInt("sid"), MPVLib.getPropertyInt("secondary-sid"))
     when (id) {

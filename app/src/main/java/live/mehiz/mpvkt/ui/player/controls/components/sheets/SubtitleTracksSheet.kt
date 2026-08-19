@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Link
 import androidx.compose.material.icons.filled.MoreTime
 import androidx.compose.material.icons.filled.Palette
 import androidx.compose.material3.Checkbox
@@ -31,6 +32,7 @@ fun SubtitlesSheet(
   tracks: ImmutableList<TrackNode>,
   onSelect: (Int) -> Unit,
   onAddSubtitle: () -> Unit,
+  onAddSubtitleFromUrl: () -> Unit,
   onOpenSubtitleSettings: () -> Unit,
   onOpenSubtitleDelay: () -> Unit,
   onDismissRequest: () -> Unit,
@@ -44,6 +46,9 @@ fun SubtitlesSheet(
         stringResource(R.string.player_sheets_add_ext_sub),
         onAddSubtitle,
         actions = {
+          IconButton(onClick = onAddSubtitleFromUrl) {
+            Icon(Icons.Default.Link, stringResource(R.string.player_sheets_add_track_url))
+          }
           IconButton(onClick = onOpenSubtitleSettings) {
             Icon(Icons.Default.Palette, null)
           }

@@ -579,9 +579,11 @@ fun PlayerControls(
       sheetShown = sheetShown,
       subtitles = subtitles,
       onAddSubtitle = viewModel::addSubtitle,
+      onAddSubtitleFromUrl = viewModel::addSubtitleFromUrl,
       onSelectSubtitle = viewModel::selectSub,
       audioTracks = audioTracks,
       onAddAudio = viewModel::addAudio,
+      onAddAudioFromUrl = viewModel::addAudioFromUrl,
       onSelectAudio = {
         if (MPVLib.getPropertyInt("aid") == it.id) {
           MPVLib.setPropertyBoolean("aid", false)
