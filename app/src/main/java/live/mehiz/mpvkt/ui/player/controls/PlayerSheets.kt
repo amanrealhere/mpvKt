@@ -4,10 +4,15 @@ import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import dev.vivvvek.seeker.Segment
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
+import live.mehiz.mpvkt.R
 import live.mehiz.mpvkt.database.entities.CustomButtonEntity
 import live.mehiz.mpvkt.ui.player.Decoder
 import live.mehiz.mpvkt.ui.player.Panels
@@ -62,7 +67,7 @@ fun PlayerSheets(
   when (sheetShown) {
     Sheets.None -> {}
     Sheets.SubtitleTracks -> {
-      var showSubtitleUrlDialog = false
+      var showSubtitleUrlDialog by remember { mutableStateOf(false) }
 
       if (showSubtitleUrlDialog) {
         AddTrackUrlDialog(
@@ -93,7 +98,7 @@ fun PlayerSheets(
     }
 
     Sheets.AudioTracks -> {
-      var showAudioUrlDialog = false
+      var showAudioUrlDialog by remember { mutableStateOf(false) }
 
       if (showAudioUrlDialog) {
         AddTrackUrlDialog(

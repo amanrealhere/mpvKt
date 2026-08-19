@@ -36,7 +36,9 @@ fun AddTrackUrlDialog(
       color = MaterialTheme.colorScheme.surface,
     ) {
       Column(
-        modifier = Modifier.padding(MaterialTheme.spacing.medium),
+        modifier = Modifier
+          .fillMaxWidth()
+          .padding(MaterialTheme.spacing.medium),
         verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.medium),
       ) {
         Text(
@@ -48,7 +50,9 @@ fun AddTrackUrlDialog(
           value = url,
           onValueChange = { url = it },
           modifier = Modifier.fillMaxWidth(),
-          label = { Text(stringResource(R.string.player_sheets_track_url_hint)) },
+          label = {
+            Text(stringResource(R.string.player_sheets_track_url_hint))
+          },
           singleLine = true,
         )
 
