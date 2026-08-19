@@ -7,4 +7,6 @@
 /captures
 .externalNativeBuild
 .cxx
-local.propertiesmpvkt-release.jks
+local.properties
+mpvkt-release.jks
+mpvkt-release.b64
