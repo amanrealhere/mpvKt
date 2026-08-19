@@ -40,8 +40,30 @@ android {
     }
   }
 
+  signingConfigs {
+    create("release") {
+      val keystoreFile = System.getenv("KEYSTORE_FILE")
+      val keystorePassword = System.getenv("KEYSTORE_PASSWORD")
+      val keyAlias = System.getenv("KEY_ALIAS")
+      val keyPassword = System.getenv("KEY_PASSWORD")
+
+      if (
+        keystoreFile != null &&
+        keystorePassword != null &&
+        keyAlias != null &&
+        keyPassword != null
+      ) {
+        storeFile = file(keystoreFile)
+        storePassword = keystorePassword
+        this.keyAlias = keyAlias
+        this.keyPassword = keyPassword
+      }
+    }
+  }
+
   buildTypes {
     named("release") {
+      signingConfig = signingConfigs["release"]
       isMinifyEnabled = true
       isShrinkResources = false
       proguardFiles(
